@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Registration Form</title>
+
+    <style>
+        body{
+            font-family: Arial;
+            background-color: lightblue;
+        }
+
+        .box{
+            width: 350px;
+            margin: 50px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        input{
+            width: 100%;
+            padding: 8px;
+            margin-top: 8px;
+        }
+
+        button{
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+        }
+
+        p{
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="box">
+
+<h2>Registration Form</h2>
+
+<form onsubmit="return validateForm()">
+
+    <input type="text" id="name" placeholder="Enter Name">
+
+    <input type="text" id="username" placeholder="Enter Username"
+           onkeyup="checkUsername()">
+    <p id="userMsg"></p>
+
+    <input type="text" id="email" placeholder="Enter Email">
+
+    <input type="password" id="password" placeholder="Enter Password"
+           onkeyup="checkPassword()">
+    <p id="passMsg"></p>
+
+    <input type="text" id="phone" placeholder="Enter Mobile Number"
+           onblur="checkPhone()">
+
+    <button type="submit">Register</button>
+
+</form>
+
+</div>
+
+<script>
+
+// Check username length
+function checkUsername()
+{
+    let username = document.getElementById("username").value;
+
+    if(username.length < 5)
+    {
+        document.getElementById("userMsg").innerHTML =
+        "Username must have 5 characters";
+        document.getElementById("userMsg").style.color = "red";
+    }
+    else
+    {
+        document.getElementById("userMsg").innerHTML =
+        "Username is valid";
+        document.getElementById("userMsg").style.color = "green";
+    }
+}
+
+// Check password strength
+function checkPassword()
+{
+    let password = document.getElementById("password").value;
+
+    if(password.length < 6)
+    {
+        document.getElementById("passMsg").innerHTML =
+        "Weak Password";
+        document.getElementById("passMsg").style.color = "red";
+    }
+    else
+    {
+        document.getElementById("passMsg").innerHTML =
+        "Strong Password";
+        document.getElementById("passMsg").style.color = "green";
+    }
+}
+
+// Check phone number
+function checkPhone()
+{
+    let phone = document.getElementById("phone").value;
+
+    let phonePattern = /^[0-9]{10}$/;
+
+    if(!phonePattern.test(phone))
+    {
+        alert("Enter a valid 10 digit mobile number");
+    }
+}
+
+// Form validation
+function validateForm()
+{
+    let name = document.getElementById("name").value;
+    let email = document.getElementById("email").value;
+    let password = document.getElementById("password").value;
+
+    if(name === "")
+    {
+        alert("Name cannot be empty");
+        return false;
+    }
+
+    let emailPattern = /^\S+@\S+\.\S+$/;
+
+    if(!emailPattern.test(email))
+    {
+        alert("Invalid Email");
+        return false;
+    }
+
+    if(password.length < 6)
+    {
+        alert("Password should contain at least 6 characters");
+        return false;
+    }
+
+    return true;
+}
+
+</script>
+
+</body>
+</html>

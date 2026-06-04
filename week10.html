@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Logic Tasks</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            display: flex;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f3f5;
+        }
+
+        .left {
+            width: 35%;
+            background-color: #dcdde1;
+            padding: 20px;
+            border-right: 2px solid #999;
+        }
+
+        .right {
+            width: 65%;
+            padding: 20px;
+        }
+
+        input {
+            width: 95%;
+            padding: 8px;
+            margin-bottom: 10px;
+        }
+
+        button {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 8px;
+            background-color: #40739e;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        #output {
+            background: #ffffff;
+            padding: 15px;
+            min-height: 200px;
+            white-space: pre-line;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="left">
+        <h3>Input</h3>
+
+        <input type="text" id="data" placeholder="Enter values">
+
+        <button onclick="findSign()">Sign of Product</button>
+        <button onclick="sortThree()">Sort 3 Numbers</button>
+        <button onclick="largestFive()">Largest of 5</button>
+        <button onclick="oddEven()">Odd/Even 0-15</button>
+        <button onclick="studentMarks()">Student Grade</button>
+    </div>
+
+    <div class="right">
+        <h3>Output</h3>
+        <div id="output">Result will appear here</div>
+    </div>
+
+    <script>
+        function getArray() {
+            let val = document.getElementById("data").value;
+            return val.split(",").map(Number);
+        }
+
+        // 1. Sign of product (3 numbers)
+        function findSign() {
+            let arr = getArray();
+
+            if (arr.length != 3) {
+                alert("Enter exactly 3 numbers");
+                return;
+            }
+
+            let neg = 0;
+
+            for (let x of arr) {
+                if (x < 0) neg++;
+            }
+
+            let sign = (neg % 2 == 0) ? "Positive (+)" : "Negative (-)";
+            alert("Sign of product: " + sign);
+
+            document.getElementById("output").innerText = "Sign: " + sign;
+        }
+
+        // 2. Sort 3 numbers
+        function sortThree() {
+            let arr = getArray();
+
+            if (arr.length != 3) {
+                alert("Enter exactly 3 numbers");
+                return;
+            }
+
+            arr.sort(function(a, b) { return b - a; });
+
+            alert("Sorted: " + arr.join(", "));
+            document.getElementById("output").innerText = "Sorted: " + arr.join(", ");
+        }
+
+        // 3. Largest of 5 numbers
+        function largestFive() {
+            let arr = getArray();
+
+            if (arr.length != 5) {
+                alert("Enter exactly 5 numbers");
+                return;
+            }
+
+            let max = arr[0];
+
+            for (let x of arr) {
+                if (x > max) max = x;
+            }
+
+            alert("Largest: " + max);
+            document.getElementById("output").innerText = "Largest: " + max;
+        }
+
+        // 4. Odd / Even loop (0 to 15)
+        function oddEven() {
+            let text = "";
+
+            for (let i = 0; i <= 15; i++) {
+                if (i % 2 == 0)
+                    text += i + " is Even\n";
+                else
+                    text += i + " is Odd\n";
+            }
+
+            document.getElementById("output").innerText = text;
+        }
+
+        // 5. Student grade (6 subjects)
+        function studentMarks() {
+            let arr = getArray();
+
+            if (arr.length != 6) {
+                alert("Enter 6 subject marks");
+                return;
+            }
+
+            let sum = 0;
+
+            for (let x of arr) {
+                sum += x;
+            }
+
+            let avg = sum / arr.length;
+            let grade;
+
+            if (avg >= 90) grade = "A";
+            else if (avg >= 75) grade = "B";
+            else if (avg >= 60) grade = "C";
+            else grade = "D";
+
+            alert("Average: " + avg + " Grade: " + grade);
+
+            document.getElementById("output").innerText =
+                "Average: " + avg + "\nGrade: " + grade;
+        }
+    </script>
+
+</body>
+</html>

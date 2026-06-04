@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Logic Tasks</title>
+
+    <style>
+        body {
+            background-color: #2d3436;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            margin-top: 60px;
+        }
+
+        .container {
+            background-color: #ffffff;
+            padding: 30px;
+            width: 340px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        h2 {
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+
+        input {
+            width: 95%;
+            padding: 9px;
+            margin: 12px 0;
+            border: 1px solid #aaa;
+            border-radius: 6px;
+            text-align: center;
+        }
+
+        .btns {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+
+        button {
+            padding: 10px;
+            border: none;
+            border-radius: 6px;
+            background-color: #0984e3;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #086bb5;
+        }
+
+        .result {
+            background-color: #ecf0f1;
+            padding: 12px;
+            border-radius: 6px;
+            min-height: 40px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h2>Number Operations</h2>
+
+        <input type="number" id="num" placeholder="Enter number">
+
+        <div class="btns">
+            <button onclick="evenOdd()">Even/Odd</button>
+            <button onclick="primeCheck()">Prime</button>
+            <button onclick="factorial()">Factorial</button>
+            <button onclick="armstrong()">Armstrong</button>
+        </div>
+
+        <div id="result" class="result">Result will be shown here</div>
+    </div>
+
+    <script>
+        function getValue() {
+            let x = document.getElementById("num").value;
+
+            if (x == "") {
+                document.getElementById("result").innerText = "Enter a number";
+                return null;
+            }
+
+            return parseInt(x);
+        }
+
+        function evenOdd() {
+            let n = getValue();
+            if (n == null) return;
+
+            let res = (n % 2 == 0) ? "Even" : "Odd";
+            document.getElementById("result").innerText = n + " is " + res;
+        }
+
+        function primeCheck() {
+            let n = getValue();
+            if (n == null) return;
+
+            if (n < 2) {
+                document.getElementById("result").innerText = n + " is Not Prime";
+                return;
+            }
+
+            for (let i = 2; i <= Math.sqrt(n); i++) {
+                if (n % i == 0) {
+                    document.getElementById("result").innerText = n + " is Not Prime";
+                    return;
+                }
+            }
+
+            document.getElementById("result").innerText = n + " is Prime";
+        }
+
+        function factorial() {
+            let n = getValue();
+            if (n == null) return;
+
+            if (n < 0) {
+                document.getElementById("result").innerText = "Not defined for negative";
+                return;
+            }
+
+            let f = 1;
+            for (let i = 1; i <= n; i++) {
+                f *= i;
+            }
+
+            document.getElementById("result").innerText = "Factorial: " + f;
+        }
+
+        function armstrong() {
+            let n = getValue();
+            if (n == null) return;
+
+            let temp = n;
+            let sum = 0;
+            let digits = String(n).length;
+            while (temp > 0) {
+                let r = temp % 10;
+                sum += Math.pow(r, digits);
+                temp = Math.floor(temp / 10);
+            }
+
+            if (sum == n)
+                document.getElementById("result").innerText = n + " is Armstrong";
+            else
+                document.getElementById("result").innerText = n + " is Not Armstrong";
+        }
+    </script>
+
+</body>
+</html>
